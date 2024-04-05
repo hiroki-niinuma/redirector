@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>redirect test</title>
+  <script>
+    function getRedirectCount() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return parseInt(urlParams.get('redirect') || '0');
+    }
+
+    function redirectToNext() {
+      const redirectCount = getRedirectCount();
+      if (redirectCount > 0) {
+        const nextUrl = window.location.pathname + '?redirect=' + (redirectCount - 1);
+        window.location.href = nextUrl;
+      } else {
+        document.getElementById('message').textContent = 'Complete!';
+      }
+    }
+
+    window.onload = redirectToNext;
+  </script>
+</head>
+<body>
+  <h1>redirect test</h1>
+  <p id="message"></p>
+</body>
+</html>
